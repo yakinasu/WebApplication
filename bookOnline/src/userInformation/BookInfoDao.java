@@ -85,13 +85,12 @@ public abstract class BookInfoDao {
 		 * @throws SQLException
 		 */
 
-		public BookBean selectBookInfo(String isbn, String sql) throws SQLException {
+		public ArrayList<HashMap<String, String>> searchBookInfo(String sql) throws SQLException {
 			conn = DriverManager.getConnection(this.url, this.user, this.password);
-			BookBean forSearch = new BookBean();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			HashMap map = new HashMap();
-			ArrayList list = new ArrayList();
+			HashMap<String, String> map = new HashMap<String, String>();
+			ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 			while (rs.next()) {
 				map.clear();
 				map.put("isbn",rs.getString("isbn"));
@@ -99,20 +98,9 @@ public abstract class BookInfoDao {
 				map.put("page", rs.getString("page"));
 				map.put("author", rs.getString("author"));
 				list.add(map);
-//				String answer =rs.getString("isbn");
-//				if (isbn.equals(answer)) {
-//					String tytle = rs.getString("tytle");
-//					String totalPage = rs.getString("page");
-//					String author = rs.getString("author");
-//					forSearch.setAuthor(author);
-//					forSearch.setTotalPage(totalPage);
-//					forSearch.setBookTytle(tytle);
-//					forSearch.setIsbn(answer);
-//					break;
-//				}
 			}
 			rs.close();
-			return forSearch;
+			return list;
 		}
 		/**
 		 *

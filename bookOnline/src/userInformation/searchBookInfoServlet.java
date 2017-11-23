@@ -38,10 +38,17 @@ public class searchBookInfoServlet extends HttpServlet {
 		}
 		String isbn = request.getParameter("isbn");
 		bookBean = searchBookSql.selectBookdb(isbn);
-		request.setAttribute("bookList", bookBean);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/searchResult.jsp");
-		dispatcher.forward(request, response);
-		return;
+		if (bookBean == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/confirmError.html");
+			dispatcher.forward(request, response);
+			return;
+		} else {
+			request.setAttribute("bookList", bookBean);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/searchResult.jsp");
+			dispatcher.forward(request, response);
+			return;
+
+		}
 	}
 
 	/**

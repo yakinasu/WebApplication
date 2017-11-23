@@ -1,6 +1,8 @@
 package userInformation;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BookInfoLogic extends BookInfoDao{
 
@@ -11,6 +13,7 @@ public class BookInfoLogic extends BookInfoDao{
 	public static String sqlUpDatePage = "update bookInfodb set page = ? where isbn = ?";
 	public static String sqlUpDateAuthor = "update bookInfodb set author = ? where isbn = ?";
 	BookBean forSearch = new BookBean();
+	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
 	public void insertBookInfodb(BookBean bookBean) throws SQLException {
 		try {
@@ -24,14 +27,24 @@ public class BookInfoLogic extends BookInfoDao{
 		}
 	}
 
-	public BookBean selectBookdb(String isbn) {
+	public ArrayList<HashMap<String, String>>  searchBookdb() {
 		try {
 			this.bookInfoGet();
-			forSearch = this.selectBookInfo(isbn, sqlSelect);
+			list = this.searchBookInfo(sqlSelect);
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	public BookBean selectBookdb(String isbn) {
+		try {
+			list = this.searchBookdb();
+			forSearch = this.findNeedData(list, isbn);
 		} catch (Exception e) {
 		}
 		return forSearch;
 	}
+
 	public void deleteBookdb(String isbn) {
 		try {
 			this.bookInfoGet();
@@ -56,6 +69,7 @@ public class BookInfoLogic extends BookInfoDao{
 
 		}
 	}
+
 	/**
 	 *
 	 * @param beans
@@ -65,6 +79,25 @@ public class BookInfoLogic extends BookInfoDao{
 		System.out.println(bookBean.getIsbn());
 		System.out.println(bookBean.getBookTytle());
 		System.out.println(bookBean.getTotalPage());
+	}
+
+	public BookBean findNeedData (ArrayList<HashMap<String, String>> list, String isbn) {
+		BookBean bookBean = new BookBean();
+		for (HashMap<String, String> search : list) {
+			if (isbn.equals(search.get("isbn"))) {
+				bookBean.setIsbn(isbn);
+				bookBean.setBookTytle(search.get("tytle"));
+				bookBean.setTotalPage(search.get("page"));
+				bookBean.setAuthor(search.get("author"));
+				System.out.println("========================");
+				System.out.println(search.get("tytle"));
+				System.out.println("========================");
+				return bookBean;
+			}
+			System.out.println(search.get("tytle"));
+
+		}
+		return null;
 	}
 
 }
