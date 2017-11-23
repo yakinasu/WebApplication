@@ -1,0 +1,24 @@
+body {
+	margin: 0;
+	padding: 0;
+	color: #ff0000;
+	}
+
+.info {
+	color: black;
+	margin: 10;
+}
+
+#head {
+	color:blue;
+}
+
+.button:hover {
+	background-color:#ddd;
+}
+
+.stringwidth {
+	width:200px;
+	height:20px;
+	overflow:scroll;
+}

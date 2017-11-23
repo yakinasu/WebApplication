@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<link rel="stylesheet" type="text/css" href="common.css">
+		<head>
+		<meta charset="UTF-8">
+			<script type="text/javascript" src="/bookCheck.js"></script>
+			<title>Add_book</title>
+		</head>
+		<body>
+			<div id="head">本情報を登録します</div>
+			<p class="info">必要事項を記入して
+			<span style ="background-color: #0099FF">追加</span>
+			を押してください。</p>
+				<form method="get" name = "checkBlank" action ="./AddBookInfoServlet" onClick="return checkBlank()">
+					<table border = "1">
+						<tr>
+							<th>ISBNcode</th>
+							<td><input type = "text" class= "stringwidth" name = "tytle"></td>
+						</tr>
+						<tr>
+							<th>BookTytle</th>
+							<td><input type = "text" class= "stringwidth" name = "isbn"></td>
+						</tr>
+						<tr>
+						<th>Page</th>
+							<td><input type = "text" class= "stringwidth" name = "page"></td>
+						</tr>
+						<tr>
+							<th>Author</th>
+							<td><input type = "text" class= "stringwidth" name = "author"></td>
+						</tr>
+					</table>
+					<input type = "submit"  class = "button" value = "追加する">
+				</form>
+		</body>
+</html>

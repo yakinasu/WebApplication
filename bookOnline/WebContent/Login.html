@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			ログイン画面
+		</title>
+	</head>
+	<body>
+		<h1>本棚ツールへようこそ</h1>
+		<form method= "get" action = "./loginServlet" >
+			<p>
+				ユーザーID :<input type="text" name="userName">
+			</p>
+			<p>
+				パスワード :<input type="password" name="password">
+			</p>
+			<input type="submit" value="ログイン">
+		</form>
+		<form method= "post" action = "./loginServlet" >
+			<input type = "submit" value="新規登録">
+		</form>
+	</body>
+</html>
