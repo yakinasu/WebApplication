@@ -76,6 +76,7 @@ public abstract class BookInfoDao {
 			System.out.println("setFinish");
 			ps.executeUpdate();
 			System.out.println("execute");
+			conn.close();
 		}
 		/**
 		 *
@@ -89,9 +90,9 @@ public abstract class BookInfoDao {
 			conn = DriverManager.getConnection(this.url, this.user, this.password);
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			HashMap<String, String> map = new HashMap<String, String>();
 			ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 			while (rs.next()) {
+				HashMap<String, String> map = new HashMap<String, String>();
 				map.clear();
 				map.put("isbn",rs.getString("isbn"));
 				map.put("tytle", rs.getString("tytle"));
@@ -99,7 +100,7 @@ public abstract class BookInfoDao {
 				map.put("author", rs.getString("author"));
 				list.add(map);
 			}
-			rs.close();
+			conn.close();
 			return list;
 		}
 		/**
@@ -115,6 +116,7 @@ public abstract class BookInfoDao {
 			System.out.println(sql);
 			System.out.println(deleteKey);
 			ps.executeUpdate();
+			conn.close();
 		}
 		/**
 		 *
@@ -133,6 +135,7 @@ public abstract class BookInfoDao {
 			System.out.println(newData);
 			System.out.println(isbn);
 			ps.executeUpdate();
+			conn.close();
 		}
 
 	}
