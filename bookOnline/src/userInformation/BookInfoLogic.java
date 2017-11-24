@@ -12,6 +12,7 @@ public class BookInfoLogic extends BookInfoDao{
 	public static String sqlUpDateTitle = "update bookInfodb set tytle = ? where isbn = ?";
 	public static String sqlUpDatePage = "update bookInfodb set page = ? where isbn = ?";
 	public static String sqlUpDateAuthor = "update bookInfodb set author = ? where isbn = ?";
+	public static String sqlUserAdd = "INSERT INTO UserInfo (username, password) VALUES(?, ?)";
 	BookBean forSearch = new BookBean();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
@@ -70,6 +71,11 @@ public class BookInfoLogic extends BookInfoDao{
 		}
 	}
 
+	public void userCreate(UserBean userBean) throws SQLException {
+		this.bookInfoGet();
+		this.addUserInfo(sql, userBean);
+	}
+
 	/**
 	 *
 	 * @param beans
@@ -89,9 +95,6 @@ public class BookInfoLogic extends BookInfoDao{
 				bookBean.setBookTytle(search.get("tytle"));
 				bookBean.setTotalPage(search.get("page"));
 				bookBean.setAuthor(search.get("author"));
-				System.out.println("========================");
-				System.out.println(search.get("tytle"));
-				System.out.println("========================");
 				return bookBean;
 			}
 			System.out.println(search.get("tytle"));

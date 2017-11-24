@@ -138,4 +138,12 @@ public abstract class BookInfoDao {
 			conn.close();
 		}
 
+		public void addUserInfo(String sql, UserBean userBean) throws SQLException {
+			conn = DriverManager.getConnection(url, user, password);
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userBean.getName());
+			ps.setString(2, userBean.getPassword());
+			ps.executeQuery();
+			conn.close();
+		}
 	}
