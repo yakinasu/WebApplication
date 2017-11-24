@@ -44,6 +44,10 @@ public abstract class BookInfoDao {
 		password = "";
 	}
 
+	/**
+	 *Mysqlに接続する
+	 * @throws SQLException
+	 */
 	public void bookInfoGet() throws SQLException {
 		String msg = "";
 			try {
@@ -58,13 +62,13 @@ public abstract class BookInfoDao {
 			}
 			     System.out.println(msg);
 		}
+
 		/**
-		 *
+		 *本情報をデータベースに追加する
 		 * @param bookBean
 		 * @param sql
 		 * @throws SQLException
 		 */
-
 		public void addBookInfo (BookBean bookBean, String sql) throws SQLException {
 
 			conn = DriverManager.getConnection(this.url, this.user, this.password);
@@ -78,14 +82,15 @@ public abstract class BookInfoDao {
 			System.out.println("execute");
 			conn.close();
 		}
+
 		/**
-		 *
+		 * 本情報を全検索する
+		 * 検索済みのものはListにして返す
 		 * @param isbn
 		 * @param sql
 		 * @return
 		 * @throws SQLException
 		 */
-
 		public ArrayList<HashMap<String, String>> searchBookInfo(String sql) throws SQLException {
 			conn = DriverManager.getConnection(this.url, this.user, this.password);
 			Statement stmt = conn.createStatement();
@@ -103,8 +108,9 @@ public abstract class BookInfoDao {
 			conn.close();
 			return list;
 		}
+
 		/**
-		 *
+		 *　本情報を主キーを渡して削除する
 		 * @param sql
 		 * @param deleteKey
 		 * @throws SQLException
@@ -118,8 +124,9 @@ public abstract class BookInfoDao {
 			ps.executeUpdate();
 			conn.close();
 		}
+
 		/**
-		 *
+		 * 本情報を更新する
 		 * @param sql
 		 * @param field
 		 * @param newData
@@ -138,6 +145,12 @@ public abstract class BookInfoDao {
 			conn.close();
 		}
 
+		/**
+		 * User情報を新しく追加する
+		 * @param sql
+		 * @param userBean
+		 * @throws SQLException
+		 */
 		public void addUserInfo(String sql, UserBean userBean) throws SQLException {
 			conn = DriverManager.getConnection(url, user, password);
 			PreparedStatement ps = conn.prepareStatement(sql);
