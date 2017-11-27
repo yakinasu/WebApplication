@@ -44,6 +44,10 @@ public abstract class BookInfoDao {
 		password = "";
 	}
 
+	/**
+	 *Mysqlに接続する
+	 * @throws SQLException
+	 */
 	public void bookInfoGet() throws SQLException {
 		String msg = "";
 			try {
@@ -58,13 +62,13 @@ public abstract class BookInfoDao {
 			}
 			     System.out.println(msg);
 		}
+
 		/**
-		 *
+		 *本情報をデータベースに追加する
 		 * @param bookBean
 		 * @param sql
 		 * @throws SQLException
 		 */
-
 		public void addBookInfo (BookBean bookBean, String sql) throws SQLException {
 
 			conn = DriverManager.getConnection(this.url, this.user, this.password);
@@ -76,46 +80,37 @@ public abstract class BookInfoDao {
 			System.out.println("setFinish");
 			ps.executeUpdate();
 			System.out.println("execute");
+			conn.close();
 		}
+
 		/**
-		 *
+		 * 本情報を全検索する
+		 * 検索済みのものはListにして返す
 		 * @param isbn
 		 * @param sql
 		 * @return
 		 * @throws SQLException
 		 */
-
-		public BookBean selectBookInfo(String isbn, String sql) throws SQLException {
+		public ArrayList<HashMap<String, String>> searchBookInfo(String sql) throws SQLException {
 			conn = DriverManager.getConnection(this.url, this.user, this.password);
-			BookBean forSearch = new BookBean();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			HashMap map = new HashMap();
-			ArrayList list = new ArrayList();
+			ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 			while (rs.next()) {
+				HashMap<String, String> map = new HashMap<String, String>();
 				map.clear();
 				map.put("isbn",rs.getString("isbn"));
 				map.put("tytle", rs.getString("tytle"));
 				map.put("page", rs.getString("page"));
 				map.put("author", rs.getString("author"));
 				list.add(map);
-//				String answer =rs.getString("isbn");
-//				if (isbn.equals(answer)) {
-//					String tytle = rs.getString("tytle");
-//					String totalPage = rs.getString("page");
-//					String author = rs.getString("author");
-//					forSearch.setAuthor(author);
-//					forSearch.setTotalPage(totalPage);
-//					forSearch.setBookTytle(tytle);
-//					forSearch.setIsbn(answer);
-//					break;
-//				}
 			}
-			rs.close();
-			return forSearch;
+			conn.close();
+			return list;
 		}
+
 		/**
-		 *
+		 *　本情報を主キーを渡して削除する
 		 * @param sql
 		 * @param deleteKey
 		 * @throws SQLException
@@ -127,9 +122,11 @@ public abstract class BookInfoDao {
 			System.out.println(sql);
 			System.out.println(deleteKey);
 			ps.executeUpdate();
+			conn.close();
 		}
+
 		/**
-		 *
+		 * 本情報を更新する
 		 * @param sql
 		 * @param field
 		 * @param newData
@@ -145,6 +142,21 @@ public abstract class BookInfoDao {
 			System.out.println(newData);
 			System.out.println(isbn);
 			ps.executeUpdate();
+			conn.close();
 		}
 
+		/**
+		 * User情報を新しく追加する
+		 * @param sql
+		 * @param userBean
+		 * @throws SQLException
+		 */
+		public void addUserInfo(String sql, UserBean userBean) throws SQLException {
+			conn = DriverManager.getConnection(url, user, password);
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userBean.getName());
+			ps.setString(2, userBean.getPassword());
+			ps.executeQuery();
+			conn.close();
+		}
 	}
