@@ -1,4 +1,4 @@
-package userInformation;
+package beans;
 
 public class BookBean {
 
@@ -39,7 +39,7 @@ public class BookBean {
 		this.author = author;
 	}
 
-	protected void setBean(String isbn, String bookTytle, String totalPage, String author) {
+	public void setBean(String isbn, String bookTytle, String totalPage, String author) {
         this.setBookTytle(isbn);
         System.out.println("***********");
         System.out.println(isbn);

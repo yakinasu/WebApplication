@@ -1,4 +1,4 @@
-<%@ page import= "userInformation.BookBean" %>
+<%@ page import= "beans.BookBean" %>
 <%
 BookBean bookBean = (BookBean)request.getAttribute("bookList");
 %>
@@ -8,7 +8,7 @@ BookBean bookBean = (BookBean)request.getAttribute("bookList");
 	<title>SearchResult</title>
 	</head>
 	<body>
-		<form method="get" action ='./BookDeleteServlet'>
+		<form method="get" action ='./servlet/BookDeleteServlet'>
 			<table border = "1">
 				<tr>
 					<th>BookTitle</th>

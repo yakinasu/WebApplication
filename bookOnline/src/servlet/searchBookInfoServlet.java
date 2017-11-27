@@ -1,4 +1,4 @@
-package userInformation;
+package servlet;
 
 import java.io.IOException;
 
@@ -7,6 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import beans.BookBean;
+import logic.BookInfoLogic;
 
 /**
  * Servlet implementation class searchBookInfoServlet
@@ -32,19 +35,19 @@ public class searchBookInfoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF8");
 		if (request.getParameter("upload") != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/ChangeKey.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/ChangeKey.html");
 			dispatcher.forward(request, response);
 			return;
 		}
 		String isbn = request.getParameter("isbn");
 		bookBean = searchBookSql.selectBookdb(isbn);
 		if (bookBean == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/confirmError.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Login/confirmError.html");
 			dispatcher.forward(request, response);
 			return;
 		} else {
 			request.setAttribute("bookList", bookBean);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/searchResult.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/searchResult.jsp");
 			dispatcher.forward(request, response);
 			return;
 

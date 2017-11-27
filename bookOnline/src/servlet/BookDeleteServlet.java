@@ -1,4 +1,4 @@
-package userInformation;
+package servlet;
 
 import java.io.IOException;
 
@@ -7,6 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import beans.BookBean;
+import logic.BookInfoLogic;
 
 /**
  * Servlet implementation class BookDeleteServlet
@@ -33,10 +36,10 @@ public class BookDeleteServlet extends HttpServlet {
 		System.out.println(isbn);
 		try {
 			deleteBookSql.deleteBookdb(isbn);
-			RequestDispatcher dispatcher =request.getRequestDispatcher("/BookHome.jsp");
+			RequestDispatcher dispatcher =request.getRequestDispatcher("MainPage/BookHome.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
-			RequestDispatcher dispatcher =request.getRequestDispatcher("/confirmError.jsp");
+			RequestDispatcher dispatcher =request.getRequestDispatcher("Login/confirmError.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

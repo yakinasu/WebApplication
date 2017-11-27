@@ -1,4 +1,4 @@
-package userInformation;
+package servlet;
 
 import java.io.IOException;
 
@@ -28,17 +28,17 @@ public class MainPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF8");
 		if (request.getParameter("add") != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/bookAdd.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/bookAdd.html");
 			dispatcher.forward(request, response);
 			return;
 		}
 		if (request.getParameter("search") != null){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/searchHome.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/searchHome.html");
 			dispatcher.forward(request, response);
 			return;
 		}
 		if (request.getParameter("upload") != null){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/ChangeKey.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/ChangeKey.html");
 			dispatcher.forward(request, response);
 			return;
 		}

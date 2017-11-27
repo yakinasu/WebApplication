@@ -1,4 +1,4 @@
-package userInformation;
+package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.BookBean;
+import logic.BookInfoLogic;
 import tool.ServletHelper;
 
 /**
@@ -41,10 +43,10 @@ public class AddBookInfoServlet extends HttpServlet {
 		bookBean.setBean(isbn, bookTytle, page, author);
 		try {
 			addBookSql.insertBookInfodb(bookBean);
-			RequestDispatcher dispatcher =request.getRequestDispatcher("/BookHome.jsp");
+			RequestDispatcher dispatcher =request.getRequestDispatcher("MainPage/BookHome.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
-			send.sendDispatcher(request, response, "/confirmError.html");
+			send.sendDispatcher(request, response, "Login/confirmError.html");
 		}
 	}
 }

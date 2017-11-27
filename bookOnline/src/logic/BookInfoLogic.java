@@ -1,8 +1,12 @@
-package userInformation;
+package logic;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import beans.BookBean;
+import beans.UserBean;
+import tool.sqlCostants;
 
 public class BookInfoLogic extends BookInfoDao{
 	BookBean forSearch = new BookBean();

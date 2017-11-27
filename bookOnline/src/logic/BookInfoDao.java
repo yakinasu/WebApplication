@@ -1,4 +1,4 @@
-package userInformation;
+package logic;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import beans.BookBean;
+import beans.UserBean;
 
 public abstract class BookInfoDao {
 	java.sql.Connection  conn = null;

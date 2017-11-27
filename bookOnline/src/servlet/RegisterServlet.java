@@ -1,4 +1,4 @@
-package userInformation;
+package servlet;
 
 import java.io.IOException;
 
@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
 		String id = request.getParameter("usrName");
 		String pass = request.getParameter("password");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Login/Login.html");
 		dispatcher.forward(request, response);
 	}
 

@@ -1,4 +1,4 @@
-package userInformation;
+package servlet;
 
 import java.io.IOException;
 
@@ -31,15 +31,15 @@ public class loginServlet extends HttpServlet {
 		String user = request.getParameter("userName");
 		String password = request.getParameter("password");
 		if(user.equals("test") && password.equals("1234")){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/BookHome.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/BookHome.jsp");
 			dispatcher.forward(request, response);
 		}
 		else if (user.equals("kanri") && password.equals("1234")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Bookadmin.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/Bookadmin.html");
 			dispatcher.forward(request, response);
 		}
 		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("LoginFailed.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/LoginFailed.html");
 			dispatcher.forward(request, response);
 		}
 
@@ -51,7 +51,7 @@ public class loginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF8");
 		// result.jsp にページ遷移
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/Register.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Login/Register.html");
 		dispatcher.forward(request, response);
 	}
 

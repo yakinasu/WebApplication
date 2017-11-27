@@ -1,4 +1,4 @@
-package userInformation;
+package servlet;
 
 import java.io.IOException;
 
@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import logic.BookInfoLogic;
 
 /**
  * Servlet implementation class UploadServlet
@@ -31,10 +33,10 @@ public class UploadServlet extends HttpServlet {
 			String isbn = request.getParameter("isbn");
 			String record = request.getParameter("record");
 			updateBookSql.updataBookdb(key, isbn, record);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/BookHome.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("MainPage/BookHome.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/confirmError.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Login/confirmError.html");
 			dispatcher.forward(request, response);
 		}
 	}
